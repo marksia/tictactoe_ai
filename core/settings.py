@@ -25,7 +25,7 @@ SECRET_KEY = '##%m=61=vghdnyj@4j0+ug3za&&o-518(c(9*311=)2-s)*%^r'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['128.199.160.38', 'localhost', '127.0.0.1']
 
 
 # Application definition
@@ -73,16 +73,16 @@ WSGI_APPLICATION = 'core.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'tictactoe_db',
-        'USER': 'mark',
-        'PASSWORD': 'mindfreak',
-        'HOST': '127.0.0.1',
-        'PORT': '5432',
-    }
-}
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'tictactoe_db',
+#         'USER': 'mark',
+#         'PASSWORD': 'mindfreak',
+#         'HOST': '127.0.0.1',
+#         'PORT': '5432',
+#     }
+# }
 
 
 # Password validation
