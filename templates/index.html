@@ -1,0 +1,85 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- <link rel="stylesheet" href="style.css" /> -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}" />
+  <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Montserrat">
+  <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Merriweather">
+
+  <title>TicTacToe</title>
+</head>
+
+<nav class="navbar navbar-default navbar-fixed-top">
+  <div class="container">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand">Mark Sia Hansheng</a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+
+      <ul class="nav navbar-nav navbar-right">
+        <li><a>TicTacToe</a></li>
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+
+<div class="jumbotron" id="home-banner">
+  <div class="container">
+    <h1 class="text-center banner-title">Tic-Tac-Toe</h1>
+
+    <br><br>
+
+    <div class="col-md-6 col-md-offset-3">
+
+    <h2 class="text-center">Select your tile and click on the board to place it.</h2>
+
+    <div class="">
+      <div class="col-md-6 selectX text-right">
+        <h2>X</h2>
+      </div> 
+
+      <div class="col-md-6 selectO text-left">
+        <h2>O</h2>
+      </div>
+    </div>
+
+    <br><br>
+    <br><br>
+
+      <table class="grid">
+        <tr>
+          <td class="cell text-center" id="0"></td>
+          <td class="cell text-center" id="1"></td>
+          <td class="cell text-center" id="2"></td>
+        </tr>
+        <tr>
+          <td class="cell text-center" id="3"></td>
+          <td class="cell text-center" id="4"></td>
+          <td class="cell text-center" id="5"></td>
+        </tr>
+        <tr>
+          <td class="cell text-center" id="6"></td>
+          <td class="cell text-center" id="7"></td>
+          <td class="cell text-center" id="8"></td>
+        </tr>
+      </table>
+
+    </div>
+    
+  </div>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="{% static 'js/tictactoe.js' %}"></script>
+</html>
