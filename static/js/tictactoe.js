@@ -43,7 +43,7 @@
 	var winningConditions = [
 	[0, 1, 2 ], [3, 4 ,5], [6, 7 ,8],
 	[0, 3, 6], [1, 4, 7], [2, 5 ,8],
-	[0, 4, 8], [6, 7, 8]
+	[0, 4, 8], [2, 4, 6],
 	]
 
 	var turn;
@@ -88,8 +88,8 @@
 		"_", "_", "_"
 		]
 		$("td").html("");
-		$(".selectX h2").css("text-decoration", "none");
-		$(".selectO h2").css("text-decoration", "none");
+		// $(".selectX h2").css("text-decoration", "none");
+		// $(".selectO h2").css("text-decoration", "none");
 	}
 
 	// Obtain remaining available spots in an array
@@ -112,7 +112,20 @@
 		}
 
 	  // Check if win condition met
-	  if (checkForWin(board) == "HUMAN_WINS") {
+	  gameEndCheck(board);
+
+  	var index = getBestMove(board)
+  	var selector = "#" + index;
+  	$(selector).html(aiToken);
+  	board[index] = aiToken;
+
+    gameEndCheck(board);
+
+
+	}
+
+	function gameEndCheck(board) {
+		if (checkForWin(board) == "HUMAN_WINS") {
 	  	setTimeout(function () {
 	  		alert ("You won the game against the AI!");
 	  		resetGame();
@@ -123,20 +136,22 @@
 	  		alert ("You lost, please try again...");
 	  		resetGame();
 	  	}, 400)
-	  } else if (round >= 9) {
+	  } else if (checkMovesLeft(board) == false) {
 	  	setTimeout(function () {
 	  		alert ("You drew against the AI.");
 	  		resetGame();
 	  	}, 400)
-	  } else {
-	  	var index = getBestMove(board)
-	  	var selector = "#" + index;
-	  	$(selector).html(aiToken);
-	  	board[index] = aiToken;
-
 	  }
-
 	}
+
+	function checkMovesLeft(board){
+	    for (var i = 0; i<board.length; i++){
+	        if (board[i] == '_'){
+	            return true;
+	        }
+	    }
+	return false;
+	}  
 
 	function minimax(board, depth, isMaximizer) {
 		var availableSpotsArray = getAvailableSpots(board)
@@ -145,50 +160,50 @@
 			return 10 - depth;
 		} else if (checkForWin(board) == "HUMAN_WINS"){
 			return depth -10;
-		} else if (availableSpotsArray.length == 0) {
-	    // Game draw, return 0
-	    return 0;
-	}
+		} else if (checkMovesLeft(board) == false) {
+		    // Game draw, return 0
+		    return 0;
+		}
 
-	if (isMaximizer) {
-		var bestScore = -10000;
+		if (isMaximizer) {
+			var bestScore = -10000;
 
-	    // Go through all empty cells
-	    for (var i=0; i < board.length; i++) {
-	    	var boardCopy = board.slice()
-	    	if (boardCopy[i] == "_") {
+		    // Go through all empty cells
+		    for (var i=0; i < board.length; i++) {
+		    	var boardCopy = board.slice()
+		    	if (boardCopy[i] == "_") {
 
-	    		boardCopy[i] = aiToken;
+		    		boardCopy[i] = aiToken;
 
-	    		bestScore = Math.max(bestScore, minimax(boardCopy, depth+1, false))
+		    		bestScore = Math.max(bestScore, minimax(boardCopy, depth+1, false))
 
-	    		boardCopy[i] = "_"
+		    		boardCopy[i] = "_"
 
-	    	}
-	    }
+		    	}
+		    }
 
-	    return bestScore;
+		    return bestScore;
 
-	} else {
+		} else {
 
-		var bestScore = 10000;
+			var bestScore = 10000;
 
-	    // Go through all empty cells
-	    for (var i=0; i < board.length; i++) {
-	    	var boardCopy = board.slice()
-	    	if (boardCopy[i] == "_") {
+		    // Go through all empty cells
+		    for (var i=0; i < board.length; i++) {
+		    	var boardCopy = board.slice()
+		    	if (boardCopy[i] == "_") {
 
-	    		boardCopy[i] = humanToken;
+		    		boardCopy[i] = humanToken;
 
-	    		bestScore = Math.min(bestScore, minimax(boardCopy, depth+1, true))
+		    		bestScore = Math.min(bestScore, minimax(boardCopy, depth+1, true))
 
-	    		boardCopy[i] = "_"
-	    	}
-	    }
+		    		boardCopy[i] = "_"
+		    	}
+		    }
 
-	    return bestScore;
+		    return bestScore;
 
-	}
+		}
 
 	}
 
@@ -201,17 +216,21 @@
 			var boardCopy = board.slice()
 			if (boardCopy[i] == "_") {
 
-				boardCopy[i] = humanToken;
+				boardCopy[i] = aiToken;
 
 				moveValue = minimax(boardCopy, 0, false)
 
 				boardCopy[i] = "_"
 
 				if (moveValue > highestValue) {
+					highestValue = moveValue
 					bestMove = i;
 				}
 			}
 		}
+
+		console.log("Best move", bestMove)
+		console.log("highestvalue", highestValue)
 
 		return bestMove
 
