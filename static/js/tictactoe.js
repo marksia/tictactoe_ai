@@ -92,8 +92,6 @@
     ]
     $("td").html("");
     $("td").removeClass("checked");
-    // $(".selectX h2").css("text-decoration", "none");
-    // $(".selectO h2").css("text-decoration", "none");
   }
 
   // Obtain remaining available spots in an array
@@ -119,13 +117,15 @@
     // Check if win condition met
     gameEndCheck(board);
 
-    var index = getBestMove(board)
-    var selector = "#" + index;
-    $(selector).html(aiToken);
-    $(selector).addClass('checked');
-    board[index] = aiToken;
+    if (checkMovesLeft(board) == true) {
+      var index = getBestMove(board)
+      var selector = "#" + index;
+      $(selector).html(aiToken);
+      $(selector).addClass('checked');
+      board[index] = aiToken;
 
-    gameEndCheck(board);
+      gameEndCheck(board);
+    }
 
 
   }
