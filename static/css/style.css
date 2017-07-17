@@ -34,3 +34,11 @@ body {
   font-size: 3.5em;
   font-family: 'Montserrat', sans-serif;
 }
+
+.marker {
+  font-size: 3.5em;
+}
+
+.mb-130 {
+  margin-bottom: 130px;
+}
